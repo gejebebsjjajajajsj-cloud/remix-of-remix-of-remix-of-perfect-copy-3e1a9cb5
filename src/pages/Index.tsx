@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.svg";
 import logoMobile from "@/assets/logo_mobile.svg";
 import chatIcon from "@/assets/chat.svg";
@@ -18,6 +19,7 @@ const subscriptionPlansFromConfig = (config: SiteConfig) => [
 ];
 
 const Index = () => {
+  const { toast } = useToast();
   const [pixModalOpen, setPixModalOpen] = useState(false);
   const [isLoadingPix, setIsLoadingPix] = useState(false);
   const [pixQrBase64, setPixQrBase64] = useState<string | null>(null);
@@ -196,9 +198,17 @@ const Index = () => {
     if (!pixCode) return;
     try {
       await navigator.clipboard.writeText(pixCode);
-      alert("Código PIX copiado para a área de transferência.");
+      toast({
+        title: "✅ Código copiado!",
+        description: "Cole no app do seu banco para pagar 💸",
+      });
     } catch (error) {
       console.error("Erro ao copiar código PIX:", error);
+      toast({
+        title: "Erro ao copiar",
+        description: "Tente selecionar e copiar manualmente",
+        variant: "destructive",
+      });
     }
   };
 
