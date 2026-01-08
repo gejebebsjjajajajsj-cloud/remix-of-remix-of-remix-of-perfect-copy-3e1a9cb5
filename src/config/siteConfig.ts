@@ -1,5 +1,5 @@
 import banner from "@/assets/banner-new.jpg";
-import profilePhoto from "@/assets/profile-photo.png";
+import profilePhoto from "@/assets/profile-new.jpg";
 import teaserMain from "@/assets/teaser-video.mp4";
 import teaserAlt1 from "@/assets/kamy02.mp4";
 import gridPreview from "@/assets/grid-preview.png";
